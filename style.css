@@ -1,0 +1,165 @@
+* { 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: monospace;
+}
+:root {
+    --cells-size:   100px;
+    --marks-size:   40px;
+    --cells-color:  #78bec5;
+    --x-color:      #dc685a;
+    --o-color:      #ecaf4f;
+    --hover-color:  #3d4250;
+}
+.platform {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(3, auto);
+    
+    width: 100vw;
+    height: 100vh;
+    justify-items: center;
+    align-content: center;
+    align-items: center;
+    transition: all .5s;
+}
+.cells {
+    width: var(--cells-size);
+    height: var(--cells-size);
+    background-color: var(--cells-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 3px;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all .5s;
+}
+.cells:hover {
+    background-color: var(--hover-color);
+}
+/* *******************************
+            Drawing X
+*/
+.cells.x {
+    background-color: var(--x-color);
+}
+.cells.x::before,
+.cells.x::after {
+    content: "";
+    position: absolute;
+    width: calc(var(--marks-size) * .3);
+    height: calc(var(--marks-size) * 1.1);
+    background-color: white;
+    border-radius: 10px;
+    transition: all .5s;
+}
+.cells.x::before {
+    transform: rotate(45deg);
+    box-shadow: 5px 0px 2px;
+}
+.cells.x::after {
+    transform: rotate(-45deg);
+    box-shadow: 0px 5px 2px;
+}
+/* *******************************
+            Drawing X Hover
+*/
+.platform.x .cells:not(.x):not(.o):hover::before,
+.platform.x .cells:not(.x):not(.o):hover::after {
+    content: "";
+    position: absolute;
+    width: calc(var(--marks-size) * 0.5);
+    height: calc(var(--marks-size) * 1.5);
+    background-color: #aaa;
+    border-radius: 10px;
+}
+.platform.x .cells:not(.x):not(.o):hover::before {
+    transform: rotate(45deg);
+    box-shadow: 5px 0px 2px;
+}
+.platform.x .cells:not(.x):not(.o):hover::after {
+    transform: rotate(-45deg);
+    box-shadow: 0px 5px 2px;
+}
+/* *******************************
+            Drawing O
+*/
+.cells.o {
+    background-color: var(--o-color);
+}
+.cells.o::before,
+.cells.o::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    transition: all .5s;
+}
+/* Big circle */
+.cells.o::before {
+    width: calc(var(--marks-size) * 1.2);
+    height: calc(var(--marks-size) * 1.2);
+    background-color: white;
+}
+/* Small circle */
+.cells.o::after {
+    width: calc(var(--marks-size) * .8);
+    height: calc(var(--marks-size) * .8);
+    background-color: var(--o-color);
+}
+/* *******************************
+            Drawing O Hover
+*/
+.platform.o .cells:not(.x):not(.o):hover::before,
+.platform.o .cells:not(.x):not(.o):hover::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    transition: all .5s;
+}
+.platform.o .cells:not(.x):not(.o):hover::before {
+    width: calc(var(--marks-size) * 1.5);
+    height: calc(var(--marks-size) * 1.5);
+    background-color: #aaa;
+}
+.platform.o .cells:not(.x):not(.o):hover::after {
+    width: calc(var(--marks-size) * 1.1);
+    height: calc(var(--marks-size) * 1.1);
+    background-color: var(--hover-color);
+}
+
+/* *******************************
+            End
+*/
+#end {
+    display: flex;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    color: #3d4250;
+    background-color: rgba(0, 0, 255, .5);
+    font-size: 40px;
+}
+
+#restart {
+    color: white;
+    background-color: #3d4250;
+    border: none;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 6px 20px;
+    font-size: 20px;
+    transition: all .5s;
+}
+
+#restart:hover {
+    background-color: #262934;
+    cursor: pointer;
+}
